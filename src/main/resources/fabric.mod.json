@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "kairo",
+  "version": "${version}",
+  "name": "Kairo",
+  "description": "Kairo is a 1.21+ mod for Hypixel SkyBlock. Brings dungeon QOL features to newer versions.",
+  "icon": "assets/icon.png",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/vansencool/Kairo"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "net.vansen.kairo.Kairo"
+    ]
+  },
+  "mixins": [
+    "kairo.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "fabric": "*",
+    "minecraft": ">=1.21"
+  }
+}

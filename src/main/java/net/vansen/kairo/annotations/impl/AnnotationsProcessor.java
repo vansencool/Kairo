@@ -1,10 +1,10 @@
 package net.vansen.kairo.annotations.impl;
 
 import net.vansen.kairo.Kairo;
-import net.vansen.kairo.annotations.Chat;
-import net.vansen.kairo.annotations.CommandRegister;
-import net.vansen.kairo.annotations.Initialize;
+import net.vansen.kairo.annotations.*;
 import net.vansen.kairo.events.ChatEvent;
+import net.vansen.kairo.events.ClientChatEvent;
+import net.vansen.kairo.events.ClientCommandEvent;
 import net.vansen.kairo.events.CommandRegisterEvent;
 import net.vansen.kairo.modules.Module;
 import org.jetbrains.annotations.NotNull;
@@ -96,6 +96,14 @@ public class AnnotationsProcessor {
             Optional.ofNullable(clazz.getAnnotation(CommandRegister.class))
                     .filter(annotation -> CommandRegisterEvent.class.isAssignableFrom(clazz))
                     .ifPresent(annotation -> CommandRegisterEvent.register((CommandRegisterEvent) module));
+
+            Optional.ofNullable(clazz.getAnnotation(ClientChat.class))
+                    .filter(annotation -> ClientChatEvent.class.isAssignableFrom(clazz))
+                    .ifPresent(annotation -> ClientChatEvent.register((ClientChatEvent) module));
+
+            Optional.ofNullable(clazz.getAnnotation(ClientCommand.class))
+                    .filter(annotation -> ClientCommandEvent.class.isAssignableFrom(clazz))
+                    .ifPresent(annotation -> ClientCommandEvent.register((ClientCommandEvent) module));
         } catch (Exception ignored) {
             Kairo.logger().error("Failed to process class: {}", clazz.getName());
         }

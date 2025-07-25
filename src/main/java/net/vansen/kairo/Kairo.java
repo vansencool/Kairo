@@ -2,7 +2,10 @@ package net.vansen.kairo;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.fabric.api.client.message.v1.ClientSendMessageEvents;
 import net.vansen.kairo.annotations.impl.AnnotationsProcessor;
+import net.vansen.kairo.events.ClientChatEvent;
+import net.vansen.kairo.events.ClientCommandEvent;
 import net.vansen.kairo.events.CommandRegisterEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +28,8 @@ public class Kairo implements ClientModInitializer {
         LOGGER.info("[Kairo] Initializing event listeners...");
 
         ClientCommandRegistrationCallback.EVENT.register(CommandRegisterEvent::dispatch);
+        ClientSendMessageEvents.ALLOW_CHAT.register(ClientChatEvent::dispatch);
+        ClientSendMessageEvents.ALLOW_COMMAND.register(ClientCommandEvent::dispatch);
 
         LOGGER.info("[Kairo] Event listeners initialized.");
 

@@ -17,7 +17,7 @@ public class ChatFps implements ClientChatEvent, ClientCommandEvent, Module {
     @Override
     public boolean clientChat(@NotNull String msg) {
         if (msg.trim().equalsIgnoreCase("!fps")) {
-            ChatUtils.sendChat("Current FPS: " + MinecraftClient.getInstance().getCurrentFps());
+            ChatUtils.sendChat("FPS -> " + MinecraftClient.getInstance().getCurrentFps());
             return false;
         }
         return true;

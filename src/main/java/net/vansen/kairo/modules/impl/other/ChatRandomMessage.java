@@ -25,8 +25,6 @@ public class ChatRandomMessage implements ClientChatEvent, ClientCommandEvent, M
             "Speedrunning life one respawn at a time :D",
             "I blinked and now I’m lost. Send help.",
             "If you're reading this, you're awesome. Yes, YOU! <3",
-            "I bet you smiled just now. Caught ya! :3",
-            "I came, I saw, I stole all the secrets.",
             "Fun fact: You can’t breathe while smiling. Try it :3",
             "Breaking news: Dungeon team has unmatched swag.",
             "If I vanish, assume I became a potato IRL.",
@@ -36,8 +34,7 @@ public class ChatRandomMessage implements ClientChatEvent, ClientCommandEvent, M
             "Shhh... I’m secretly a bat spying from the ceiling :0",
             "They told me I couldn’t do it. So I did it anyway <3",
             "Today I solo’d a boss using only a spoon. Mentally.",
-            "Not lost, just exploring with extreme confusion :3",
-            "Wait... this isn’t SkyBlock??",
+            "Not lost, just playing with extreme confusion :3",
             "I once sneezed and accidentally teleported. True story.",
             "Sometimes I stare at walls and think about good drops.",
             "I sleep in dungeons. Pretty comfy!",
@@ -73,7 +70,7 @@ public class ChatRandomMessage implements ClientChatEvent, ClientCommandEvent, M
             command = "pc";
         else if (message.contains("gc") || message.contains("gchat") || message.contains("g chat") || message.contains("guild chat"))
             command = "gc";
-        if (message.contains("!ping")) {
+        if (message.contains("!rm") || message.contains("!randommessage")) {
             ChatUtils.sendChat("/" + command + " " + messages.get(ThreadLocalRandom.current().nextInt(messages.size())));
             return false;
         }

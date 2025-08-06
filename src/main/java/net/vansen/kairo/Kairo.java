@@ -3,7 +3,11 @@ package net.vansen.kairo;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.message.v1.ClientSendMessageEvents;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.math.BlockPos;
 import net.vansen.kairo.annotations.impl.AnnotationsProcessor;
+import net.vansen.kairo.events.ClientBlockUseEvent;
 import net.vansen.kairo.events.ClientChatEvent;
 import net.vansen.kairo.events.ClientCommandEvent;
 import net.vansen.kairo.events.CommandRegisterEvent;
@@ -30,6 +34,14 @@ public class Kairo implements ClientModInitializer {
         ClientCommandRegistrationCallback.EVENT.register(CommandRegisterEvent::dispatch);
         ClientSendMessageEvents.ALLOW_CHAT.register(ClientChatEvent::dispatch);
         ClientSendMessageEvents.ALLOW_COMMAND.register(ClientCommandEvent::dispatch);
+        UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
+            if (!world.isClient()) return ActionResult.PASS;
+
+            BlockPos pos = hitResult.getBlockPos();
+
+            ClientBlockUseEvent.dispatch(pos, world.getBlockState(pos));
+            return ActionResult.PASS;
+        });
 
         LOGGER.info("[Kairo] Event listeners initialized.");
 

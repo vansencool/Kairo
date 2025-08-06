@@ -2,10 +2,7 @@ package net.vansen.kairo.annotations.impl;
 
 import net.vansen.kairo.Kairo;
 import net.vansen.kairo.annotations.*;
-import net.vansen.kairo.events.ChatEvent;
-import net.vansen.kairo.events.ClientChatEvent;
-import net.vansen.kairo.events.ClientCommandEvent;
-import net.vansen.kairo.events.CommandRegisterEvent;
+import net.vansen.kairo.events.*;
 import net.vansen.kairo.modules.Module;
 import org.jetbrains.annotations.NotNull;
 import sun.misc.Unsafe;
@@ -104,6 +101,10 @@ public class AnnotationsProcessor {
             Optional.ofNullable(clazz.getAnnotation(ClientCommand.class))
                     .filter(annotation -> ClientCommandEvent.class.isAssignableFrom(clazz))
                     .ifPresent(annotation -> ClientCommandEvent.register((ClientCommandEvent) module));
+
+            Optional.ofNullable(clazz.getAnnotation(ClientBlockUse.class))
+                    .filter(annotation -> ClientBlockUseEvent.class.isAssignableFrom(clazz))
+                    .ifPresent(annotation -> ClientBlockUseEvent.register((ClientBlockUseEvent) module));
         } catch (Exception ignored) {
             Kairo.logger().error("Failed to process class: {}", clazz.getName());
         }

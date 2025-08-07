@@ -116,7 +116,7 @@ public class ChatRandomMessage implements ClientChatEvent, ClientCommandEvent, M
             return false;
         }
         if (WHOLESOME_COMMANDS.stream().anyMatch(message::contains)) {
-            ChatUtils.sendChat(wholesome.get(ThreadLocalRandom.current().nextInt(wholesome.size())));
+            ChatUtils.sendChat("/" + command + " " + wholesome.get(ThreadLocalRandom.current().nextInt(wholesome.size())));
             return false;
         }
         return true;
